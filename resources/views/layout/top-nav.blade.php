@@ -7,8 +7,8 @@
       <nav class="nav navbar-nav">
       <ul class=" navbar-right">
         <li class="nav-item dropdown open" style="padding-left: 15px;">
-          <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-            <img src="images/img.jpg" alt="">Admin
+          <a href="javascript:;" style="text-transform:uppercase;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+            <img src="{!! asset('images/my-pf.jpg') !!}" alt="" >{{ Auth::user()->name }}
           </a>
           <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
             <a class="dropdown-item"  href="javascript:;"> Profile</a>
@@ -21,70 +21,19 @@
           </div>
         </li>
 
-        <li role="presentation" class="nav-item dropdown open">
-          <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
-            <i class="fa fa-envelope-o"></i>
-            <span class="badge bg-green">6</span>
-          </a>
-          <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
-            <li class="nav-item">
-              <a class="dropdown-item">
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-                  <span>John Smith</span>
-                  <span class="time">3 mins ago</span>
-                </span>
-                <span class="message">
-                  Film festivals used to be do-or-die moments for movie makers. They were where...
-                </span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="dropdown-item">
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-                  <span>John Smith</span>
-                  <span class="time">3 mins ago</span>
-                </span>
-                <span class="message">
-                  Film festivals used to be do-or-die moments for movie makers. They were where...
-                </span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="dropdown-item">
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-                  <span>John Smith</span>
-                  <span class="time">3 mins ago</span>
-                </span>
-                <span class="message">
-                  Film festivals used to be do-or-die moments for movie makers. They were where...
-                </span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="dropdown-item">
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-                  <span>John Smith</span>
-                  <span class="time">3 mins ago</span>
-                </span>
-                <span class="message">
-                  Film festivals used to be do-or-die moments for movie makers. They were where...
-                </span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <div class="text-center">
-                <a class="dropdown-item">
-                  <strong>See All Alerts</strong>
-                  <i class="fa fa-angle-right"></i>
-                </a>
-              </div>
-            </li>
-          </ul>
-        </li>
+        <script type="text/javascript" charset="utf-8">
+          let a;
+          let time;
+          setInterval(() => {
+          a = new Date();
+          time = a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds();
+          document.getElementById('liveTime').innerHTML = time;
+          }, 1000);
+       </script>
+
+        <li role="presentation" class="nav-item" style="padding-left: 5px;"><span id="liveTime"></span></li>
+        <li><i class="fa fa-clock-o"></i></li>
+   
       </ul>
     </nav>
   </div>

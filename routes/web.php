@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin;
 Route::get('/home', function () {
   return redirect('dashboard');
 });
+
 Route::get('/', [Auth\AuthController::class, 'index'])->name('/');
 Route::get('login', [Auth\AuthController::class, 'showLogin'])->name('login');
 Route::post('login', [Auth\AuthController::class, 'login'])->name('login');
@@ -27,5 +28,11 @@ Route::post('register/confirm', [Auth\AuthController::class, 'registerConfirm'])
 
 Route::middleware(['auth'])->group(function () {
   Route::get('dashboard', [Admin\DashboardController::class, 'index']);
+  // スタッフ情報
+  Route::get('staff/list', [Admin\StaffInfo::class, 'index']);
+  Route::get('staff/add', [Admin\StaffInfo::class, 'showCreate']);
+  Route::post('staff/add', [Admin\StaffInfo::class, 'storeStaffData'])->name('createStaff');
+  Route::post('staff/confirm', [Admin\StaffInfo::class, 'confirm'])->name('confirmStaff');
 });
+
 

@@ -33,7 +33,6 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-
       $credentials = $request->validate([
         'email' => ['required', 'email'],
         'password' => ['required'],
@@ -47,7 +46,7 @@ class AuthController extends Controller
         Session::put('sessionUserData', $sessionUserData);
         return redirect()->intended('dashboard');
       } else {
-        return back()->withErrors(['email' => 'Your provided credentials could not be verified']);
+        return back()->withErrors(['email' => 'Your provided email or password not match!']);
       }
     }
 

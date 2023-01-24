@@ -28,6 +28,7 @@
 
     <!-- Custom Theme Style -->
     <link href="{!! asset('assets/admin/build/css/custom.min.css') !!}" rel="stylesheet">
+
   </head>
 
   {{-- Common Css --}}
@@ -36,4 +37,20 @@
       background-image: -webkit-linear-gradient(45deg,#9c7efe,#faaca8) !important;
       text-shadow:none;-webkit-background-clip: text;-webkit-text-fill-color: transparent;
     }
+    .table-striped tbody tr:nth-of-type(odd)
+    {
+      background-image: -webkit-linear-gradient(45deg,#3c00ff0f,#ffccca2e);
+    }  
+    .col-bg {
+      background-image: -webkit-linear-gradient(90deg,#3c00ff0f,#ffccca2e);
+    }
+    .dash-col-pink {
+      background: #fa82a88f;
+    }
+
+    .dash-col-purple {
+      background: #612b9ab8;
+    }
   </style>
+  
+ 
