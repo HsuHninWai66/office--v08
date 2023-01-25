@@ -49,6 +49,13 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{!! asset('assets/admin/build/js/custom.min.js') !!}"></script>
-	
+  
+    <script src="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"></script>
+        <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+        <script>
+          $(document).ready( function () {
+           $('#myTable').DataTable();
+          } );
+        </script>
   </body>
 </html>
