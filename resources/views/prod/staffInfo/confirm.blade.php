@@ -44,9 +44,7 @@
             @csrf
 
             <div class="field item form-group">
-
-                <label class="col-form-label col-md-3 col-sm-3  label-align">Name<span
-                    class="required">*</span></label>
+                <label class="col-form-label col-md-3 col-sm-3  label-align">Name<span class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
                     <input type="text" class="form-control" name="name" value="{{ $staffData['name'] }}" readonly/>
                 </div>
@@ -106,29 +104,30 @@
             <div class="field item form-group">
                 <label class="col-form-label col-md-3 col-sm-3  label-align">Profile Photo<span
                     class="required">*</span></label>
-                <div class="col-md-6 col-sm-6">
-                <input class="form-control" type="file" name="profile_img" value="{{ $staffData['experience_yr'] }}"/></div>
-            </div>
+                <div class="col-md-2 col-sm-3">
+                    <img src="/uploads/staff/{{ $staffData['profile_img'] }}" width="100%">
+                    <input class="form-control" type="hidden" name="profile_img" value="{{ $staffData['profile_img'] }}" readonly/></div>
+                </div>
 
             <div class="field item form-group">
                 <label class="col-form-label col-md-3 col-sm-3  label-align">Sign<span
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
-                <input class="form-control" type="text" name="sign" value="{{ $staffData['sign'] }}"/></div>
+                <input class="form-control" type="text" name="sign" value="{{ $staffData['sign'] }}" readonly/></div>
             </div>
 
             <div class="field item form-group">
                 <label class="col-form-label col-md-3 col-sm-3  label-align">Remark<span
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
-                <textarea name='remark'>{{ $staffData['remark'] }}</textarea></div>
+                <textarea name='remark' readonly>{{ $staffData['remark'] }}</textarea></div>
             </div>
             <input class="form-control" type="hidden" name="status" value="1"/></div>
 
                 <div class="form-group">
                 <div class="col-md-6 offset-md-3">
+                    <button type='reset' class="btn btn-secondary" onclick="history.go(-1)">Back</button>
                     <button type='submit' class="btn btn-primary">Submit</button>
-                    <button type='reset' class="btn btn-success">Reset</button>
                 </div>
                 </div>
             </form>

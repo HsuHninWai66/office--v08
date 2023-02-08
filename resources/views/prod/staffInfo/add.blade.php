@@ -12,11 +12,10 @@
         </div>
 
         <div class="title_right">
-        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+        <div class="col-md-3 col-sm-5 col-xs-12 form-group pull-right top_search">
             <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for...">
             <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button">Go!</button>
+            <a class="btn" type="button" href="{{ url('staff/list') }}" style="background-color:#3f51b5;color:#fff;"><span class="fa fa-arrow-left pr-2"> </span>Go to lists</a>
             </span>
             </div>
         </div>
@@ -50,7 +49,7 @@
                 <div class="col-md-6 col-sm-6">
                     @error('name')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
                     <input class="form-control @error('name') parsley-error border border-danger @enderror"
-                    name="name" placeholder="ex. John f. Kennedy"/>
+                    name="name" placeholder="ex. John f. Kennedy" value="{{ old('name') }}"/>
                 </div>
             </div>
 
@@ -73,7 +72,7 @@
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
                 @error('dept')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
-                <input type="text" class="form-control @error('dept') parsley-error border border-danger @enderror" name="dept"/></div>
+                <input type="text" class="form-control @error('dept') parsley-error border border-danger @enderror" name="dept" value="{{ old('dept') }}"/></div>
             </div>
 
             <div class="field item form-group">
@@ -81,7 +80,7 @@
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
                 @error('role')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
-                <input class="form-control @error('role') parsley-error border border-danger @enderror" type="text" name="role"
+                <input class="form-control @error('role') parsley-error border border-danger @enderror" type="text" name="role" value="{{ old('role') }}"
                     data-validate-linked='email'/></div>
             </div>
 
@@ -90,7 +89,7 @@
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
                 @error('office_time')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
-                <input class="form-control @error('office_time') parsley-error border border-danger @enderror" type="text" name="office_time"></div>
+                <input class="form-control @error('office_time') parsley-error border border-danger @enderror" type="text" name="office_time" value="{{ old('office_time') }}"></div>
             </div>
 
             <div class="field item form-group">
@@ -98,7 +97,7 @@
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
                 @error('em_start_date')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
-                <input class="form-control @error('em_start_date') parsley-error border border-danger @enderror" type="date" name="em_start_date"></div>
+                <input class="form-control @error('em_start_date') parsley-error border border-danger @enderror" type="date" name="em_start_date" value="{{ old('em_start_date') }}"></div>
             </div>
 
             <div class="field item form-group">
@@ -106,7 +105,7 @@
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
                 @error('experience_yr')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
-                <input class="form-control @error('experience_yr') parsley-error border border-danger @enderror" type="text" name="experience_yr"/></div>
+                <input class="form-control @error('experience_yr') parsley-error border border-danger @enderror" type="text" name="experience_yr" value="{{ old('experience_yr') }}"/></div>
             </div>
 
             <div class="field item form-group">
@@ -114,37 +113,35 @@
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
                 @error('profile_img')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
-                <input class="form-control @error('profile_img') parsley-error border border-danger @enderror" type="file" name="profile_img"/></div>
+                <input class="form-control @error('profile_img') parsley-error border border-danger @enderror" type="file" name="profile_img" value="{{ old('profile_img') }}"/></div>
             </div>
 
             <div class="field item form-group">
                 <label class="col-form-label col-md-3 col-sm-3  label-align">Sign<span
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
-                <input class="form-control" type="text" name="sign"/></div>
+                <input class="form-control" type="text" name="sign" value="{{ old('sign') }}"/></div>
             </div>
 
             <div class="field item form-group">
                 <label class="col-form-label col-md-3 col-sm-3  label-align">Remark<span
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
-                <textarea name='remark'></textarea></div>
+                <textarea name='remark'>{{ old('remark') }}</textarea></div>
             </div>
             <input class="form-control" type="hidden" name="status" value="1"/></div>
 
                 <div class="form-group">
                 <div class="col-md-6 offset-md-3">
+                    <button type='reset' class="btn btn-secondary">Reset</button>
                     <button type='submit' class="btn btn-primary">Submit</button>
-                    <button type='reset' class="btn btn-success">Reset</button>
                 </div>
                 </div>
             </form>
         </div>
-            </div>
         </div>
         </div>
-
-
+        </div>
     </div>
         </div>
         </div>
@@ -156,6 +153,5 @@
     </div>
 </div>
 
-
-        <!-- /page content -->
+<!-- /page content -->
 @include('layout.footer')

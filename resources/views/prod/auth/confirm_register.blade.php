@@ -11,7 +11,7 @@
             <form action="{{ route('registerConfirm') }}" method="POST">
               @csrf
               <h1>Create Account</h1>
-              
+
               <div class="text-left" style="padding: 20px;">
                 Full Name : <b>{{ $userData['name'] }}</b>
                 <input type="hidden" name="name" class="form-control" value="{{ $userData['name'] }}" placeholder="Name" />
@@ -20,11 +20,13 @@
                 Email : <b>{{ $userData['email'] }}</b>
                 <input type="hidden" name="email" class="form-control" value="{{ $userData['email'] }}" />
               </div>
-              
+
               <div class="text-left" style="padding: 20px;">
                 Password : <b>********</b>
                 <input type="hidden" name="password" class="form-control" value="{{ $userData['password'] }}" />
               </div>
+              <input type="hidden" name="role" value="{{ $userData['role'] }}"/>
+              <input type="hidden" name="status" value="{{ $userData['status'] }}"/>
               <div class="clearfix"></div>
 
               <div class="separator">

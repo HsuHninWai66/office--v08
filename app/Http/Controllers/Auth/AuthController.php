@@ -15,18 +15,18 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    
+
     public function __construct()
     {
         $this->middleware('guest')->except(['logout']);
-    } 
+    }
 
-    public function index() 
+    public function index()
     {
       return redirect()->route('login');
     }
 
-    public function showLogin() 
+    public function showLogin()
     {
       return view('prod.auth.login');
     }
@@ -39,23 +39,27 @@ class AuthController extends Controller
       ]);
 
       if (Auth::attempt($credentials)) {
-        $request->session()->regenerate(); 
-        $userID =  Auth::user()->id;
-        $sessionUserData = User::Where('email', '=',$request->email)->first();
+            $request->session()->regenerate();
+            $userID =  Auth::user()->id;
+            $sessionUserData = User::Where('email', '=',$request->email)->first();
 
-        Session::put('sessionUserData', $sessionUserData);
-        return redirect()->intended('dashboard');
+            Session::put('sessionUserData', $sessionUserData);
+                if(Auth::user()->role == 'Manager'){
+                    return redirect('manager/dashboard');
+                } else {
+                    return redirect('staff/dashboard');
+                }
       } else {
         return back()->withErrors(['email' => 'Your provided email or password not match!']);
       }
     }
 
-    public function showRegister(Request $request) 
+    public function showRegister(Request $request)
     {
       return view('prod.auth.register');
     }
-    
-    public function register(Request $request) 
+
+    public function register(Request $request)
     {
       $request->validate([
         'name' => 'required',
@@ -67,19 +71,23 @@ class AuthController extends Controller
       $userData = [
         'name' => $request->get('name'),
         'email' => $request->get('email'),
-        'password' => $request->get('password')
-      ]; 
+        'password' => $request->get('password'),
+        'role' => 'admin',
+        'status' => 1,
+      ];
 
       return view('prod.auth.confirm_register', ['userData' => $userData]);
-    } 
+    }
 
     public function registerConfirm(Request $request)
     {
       $userData = [
         'name' => $request->get('name'),
         'email' => $request->get('email'),
-        'password' => Hash::make($request->get('password'))
-      ]; 
+        'password' => Hash::make($request->get('password')),
+        'role' => $request->get('role'),
+        'status' => $request->get('status'),
+      ];
 
       User::create($userData);
       return redirect('login')->with('success','You have successfully registered,please login!');
@@ -90,7 +98,6 @@ class AuthController extends Controller
       Auth::logout();
       $request->session()->invalidate();
       $request->session()->regenerateToken();
-      return redirect()->route('/');
+      return redirect()->route('login');
     }
-
 }

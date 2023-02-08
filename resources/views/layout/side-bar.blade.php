@@ -3,11 +3,7 @@
   <div class="menu_section">
     <h3>General</h3>
     <ul class="nav side-menu">
-      <li><a href="{{ url('dashboard') }}"><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-        <ul class="nav child_menu">
-          <li><a href="{{ url('dashboard') }}">Dashboard</a></li>
-        </ul>
-      </li>
+      <li class="{{ (Request::path()==('dashboard') ? 'active' : '') }}"><a href="@if(Auth::user()->role == 'Manager'){{ url('manager/dashboard') }}@else{{ url('staff/dashboard') }}@endif"><i class="fa fa-home"></i> Dashboard </a></li>
 
       <li><a><i class="fa fa-users"></i> Staff Management <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
@@ -16,6 +12,8 @@
           <li><a href="#">Absence Days</a></li>
         </ul>
       </li>
+
+      @if(Auth::user()->role == 'Manager')
 
       <li><a><i class="fa fa-clone"></i> Timecard Management <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
@@ -29,12 +27,13 @@
         </ul>
       </li>
 
+
       <li><a><i class="fa fa-user"></i> Admin <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="#">Profiles</a></li>
+          <li><a href="{{ url('profile/list') }}">Lists</a></li>
         </ul>
       </li>
-
+      @endif
     </ul>
   </div>
 

@@ -34,35 +34,52 @@ class StaffInfo extends Controller
             'status' => 'required',
         ]);
 
-        $staff = new Staff;
-        $staff->name = $request->get('name');
-        $staff->gender = $request->get('gender');
-        $staff->dept = $request->get('dept');
-        $staff->role = $request->get('role');
-        $staff->office_time = $request->get('office_time');
-        $staff->em_start_date = $request->get('em_start_date');
-        $staff->experience_yr = $request->get('experience_yr');
-        $staff->sign = $request->get('sign');
-        $staff->remark = $request->get('remark');
-        $staff->status = 1;
+        $staffData = [
+            'name' => $request->get('name'),
+            'gender' => $request->get('gender'),
+            'dept' => $request->get('dept'),
+            'role' => $request->get('role'),
+            'office_time' => $request->get('office_time'),
+            'em_start_date' => $request->get('em_start_date'),
+            'experience_yr' => $request->get('experience_yr'),
+            'sign' => $request->get('sign'),
+            'remark' => $request->get('remark'),
+            'profile_img' => $request->get('profile_img'),
+            'status' => 1,
+        ];
 
-        if ($request->hasfile('profile_img'))
-        {
-        $file = $request->file('profile_img');
-        $extension = $file->getClientOriginalExtension();
-        $filename = time().'.'.$extension;
-        $file->move('uploads/staff',$filename);
-        $staff->profile_img = $filename;
+        // Profile Image Upload
+        if ($request->hasfile('profile_img')) {
+            $file = $request->file('profile_img');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('uploads/staff', $filename);
+
+            $replacements = array('profile_img' => $filename);
+            $staffData = array_replace($staffData, $replacements);
         }
 
-        // Staff::create($staff);
-        // $staff->save();
-        return view('prod.staffInfo.confirm', ['staffData' => $staff]);
-        // return redirect('staff/list')->with('success','Staff successfully registered!');
+        return view('prod.staffInfo.confirm', ['staffData' => $staffData]);
     }
 
     public function confirm(Request $request)
     {
-        return view('prod.staffInfo.confirm');
+
+        $staffData = [
+            'name' => $request->get('name'),
+            'gender' => $request->get('gender'),
+            'dept' => $request->get('dept'),
+            'role' => $request->get('role'),
+            'office_time' => $request->get('office_time'),
+            'em_start_date' => $request->get('em_start_date'),
+            'experience_yr' => $request->get('experience_yr'),
+            'sign' => $request->get('sign'),
+            'remark' => $request->get('remark'),
+            'status' => $request->get('status'),
+            'profile_img' => $request->get('profile_img'),
+        ];
+
+        Staff::create($staffData);
+        return redirect('staff/list')->with('success', 'Staff successfully registered!');
     }
 }

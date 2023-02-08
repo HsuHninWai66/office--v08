@@ -12,11 +12,10 @@
               </div>
 
               <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="col-md-3 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
-                      <button class="btn btn-secondary" type="button">Go!</button>
+                    <a class="btn" type="button" href="{{ route('createStaff') }}" style="background-color:#3f51b5;color:#fff;">Add Staff <span class="fa fa-plus-circle pl-2"></span></a>
                     </span>
                   </div>
                 </div>
@@ -26,9 +25,13 @@
             <div class="clearfix"></div>
 
             @if (session('success'))
-                <div class="alert alert-success show mb-0" role="alert" style="margin-bottom: 10px !important;background:linear-gradient(45deg,#9c7efe8a,#faaca8a3) !important;border:none;">
+            <div class="alert alert-success alert-dismissible fade show" role="alert" style="background-color:#d4edda;color:#155724;">
                 {{session('success')}}
-                </div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span span="" aria-hidden="true">×</span>
+                </button>
+            </div>
+
             @endif
             <div class="row">
               <div class="col-md-12 col-sm-12 ">
@@ -38,13 +41,7 @@
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
-                          </div>
-                      </li>
+
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
                     </ul>

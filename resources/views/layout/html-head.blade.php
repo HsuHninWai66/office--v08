@@ -18,7 +18,7 @@
     <link href="{!! asset('assets/admin/vendors/vendors/nprogress/nprogress.css') !!}" rel="stylesheet">
     <!-- iCheck -->
     <link href="{!! asset('assets/admin/vendors/iCheck/skins/flat/green.css') !!}" rel="stylesheet">
-	
+
     <!-- bootstrap-progressbar -->
     <link href="{!! asset('assets/admin/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') !!}" rel="stylesheet">
     <!-- JQVMap -->
@@ -40,7 +40,7 @@
     .table-striped tbody tr:nth-of-type(odd)
     {
       background-image: -webkit-linear-gradient(45deg,#3c00ff0f,#ffccca2e);
-    }  
+    }
     .col-bg {
       background-image: -webkit-linear-gradient(90deg,#3c00ff0f,#ffccca2e);
     }
@@ -52,5 +52,4 @@
       background: #612b9ab8;
     }
   </style>
-  
- 
+

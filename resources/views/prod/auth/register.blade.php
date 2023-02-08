@@ -10,7 +10,7 @@
             <form action="{{ url('register') }}" method="POST">
               @csrf
               <h1>Create Account</h1>
-            
+
               <div>
                 @error('name')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
                 <input type="text" name="name" class="form-control @error('name') parsley-error border border-danger @enderror" placeholder="Full Name" value="{{ old('name') }}"/>
@@ -30,10 +30,12 @@
                 @error('conf_password')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
                 <input type="password" name="conf_password" class="form-control @error('conf_password') parsley-error border border-danger @enderror" placeholder="Confirm Password" />
               </div>
-              
+
               <div>
                 <input type="submit" value="Submit" style="width: 150px;"/>
               </div>
+              <input type="hidden" name="role"/>
+              <input type="hidden" name="status" />
 
               <div class="clearfix"></div>
 
