@@ -41,15 +41,25 @@
     {
       background-image: -webkit-linear-gradient(45deg,#3c00ff0f,#ffccca2e);
     }
-    .col-bg {
+    .col-bg{
       background-image: -webkit-linear-gradient(90deg,#3c00ff0f,#ffccca2e);
     }
     .dash-col-pink {
       background: #fa82a88f;
     }
-
     .dash-col-purple {
       background: #612b9ab8;
+    }
+
+    .btn-gradiant {
+        background-image: -webkit-linear-gradient(45deg,#9c7efe,#faaca8);
+        color: #FFF;
+    }
+    .btn:hover , .btn-secondary:hover{
+        background-image: none !important;
+        background-color: inherit !important;
+        border:1px solid #9c7efe !important;
+        color:#000 !important;
     }
   </style>
 

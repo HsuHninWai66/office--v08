@@ -103,8 +103,8 @@
             <input class="form-control" type="hidden" name="status" value="1"/></div>
 
                 <div class="col-md-6 offset-md-3">
-                    <button type='reset' class="btn btn-secondary">Reset</button>
-                    <button type='submit' class="btn btn-primary">Submit</button>
+                    <button type='reset' class="btn btn-secondary col-md-2">Reset</button>
+                    <button type='submit' class="btn btn-gradiant col-md-3">Submit</button>
                 </div>
             </form>
         </div>

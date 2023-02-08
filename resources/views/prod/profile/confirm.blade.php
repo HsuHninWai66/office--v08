@@ -95,8 +95,8 @@
 
                 <div class="form-group">
                 <div class="col-md-6 offset-md-3">
-                    <button type='reset' class="btn btn-success" onclick="history.go(-1)">Back</button>
-                    <button type='submit' class="btn btn-primary">Submit</button>
+                    <button type='reset' class="btn btn-secondary col-md-2" onclick="history.go(-1)">Back</button>
+                    <button type='submit' class="btn btn-gradiant col-md-3">Submit</button>
                 </div>
                 </div>
             </form>
