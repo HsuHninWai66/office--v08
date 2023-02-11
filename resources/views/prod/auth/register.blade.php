@@ -11,23 +11,30 @@
               @csrf
               <h1>Create Account</h1>
 
-              <div>
-                @error('name')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
-                <input type="text" name="name" class="form-control @error('name') parsley-error border border-danger @enderror" placeholder="Full Name" value="{{ old('name') }}"/>
+              <div class="row">
+                <div class="col-sm-6">
+                  @error('first_name')<small><span class="error text-danger text-left d-block">{{$message}}</span></small>@enderror
+                  <input type="text" name="first_name" class="form-control @error('first_name') parsley-error border border-danger @enderror" placeholder="First Name" value="{{ old('first_name') }}"/>
+                </div>
+
+                <div class="col-sm-6">
+                  @error('last_name')<small><span class="error text-danger text-left d-block">{{$message}}</span></small>@enderror
+                  <input type="text" name="last_name" class="form-control @error('last_name') parsley-error border border-danger @enderror" placeholder="Last Name" value="{{ old('last_name') }}"/>
+                </div>
               </div>
 
               <div>
-                @error('email')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
+                @error('email')<small><span class="error text-danger text-left d-block">{{$message}}</span></small>@enderror
                 <input type="email" name="email" class="form-control @error('email') parsley-error border border-danger @enderror" placeholder="Email" value="{{ old('email') }}" />
               </div>
 
               <div>
-                @error('password')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
+                @error('password')<small><span class="error text-danger text-left d-block">{{$message}}</span></small>@enderror
                 <input type="password" name="password" class="form-control @error('password') parsley-error border border-danger @enderror" placeholder="Password" />
               </div>
 
               <div>
-                @error('conf_password')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
+                @error('conf_password')<small><span class="error text-danger text-left d-block">{{$message}}</span></small>@enderror
                 <input type="password" name="conf_password" class="form-control @error('conf_password') parsley-error border border-danger @enderror" placeholder="Confirm Password" />
               </div>
 

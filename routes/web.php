@@ -18,6 +18,17 @@ Route::get('login', [Auth\AuthController::class, 'showLogin'])->name('login');
 Route::post('login', [Auth\AuthController::class, 'login'])->name('login');
 Route::get('logout', [Auth\AuthController::class, 'logout'])->name('logout');
 
+// email verification
+Route::get('email-verify/user/{id}',[Auth\AuthController::class,'showEmailVerification'])->name('verifyEmailForm');
+Route::get('verify-email/user/{id}/{token}',[Auth\AuthController::class,'emailVerify'])->name('verifyEmail');
+Route::post('email-resent/user/{id}',[Auth\AuthController::class,'resentEmail'])->name('resentEmail');
+
+// forgot password
+Route::get('forgot-passsword',[Auth\AuthController::class,'showRecoveryForm'])->name('recoveryForm');
+Route::post('forgot-passsword',[Auth\AuthController::class,'recoveryPassword'])->name('recoveryPassword');
+Route::get('forgot-reset/{id}/{token}',[Auth\AuthController::class,'showPasswordResetForm'])->name('passwordResetForm');
+Route::post('forgot-reset/{id}',[Auth\AuthController::class,'passwordReset'])->name('passwordReset');
+
 Route::get('register', [Auth\AuthController::class, 'showRegister'])->name('register');
 Route::post('register', [Auth\AuthController::class, 'register'])->name('register');
 Route::post('register/confirm', [Auth\AuthController::class, 'registerConfirm'])->name('registerConfirm');

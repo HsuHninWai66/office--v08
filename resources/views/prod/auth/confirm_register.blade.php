@@ -13,8 +13,9 @@
               <h1>Create Account</h1>
 
               <div class="text-left" style="padding: 20px;">
-                Full Name : <b>{{ $userData['name'] }}</b>
-                <input type="hidden" name="name" class="form-control" value="{{ $userData['name'] }}" placeholder="Name" />
+                Full Name : <b>{{ $userData['first_name']}} {{ $userData['last_name'] }}</b>
+                <input type="hidden" name="first_name" class="form-control" value="{{ $userData['first_name'] }}" placeholder="Name" />
+                <input type="hidden" name="last_name" class="form-control" value="{{ $userData['last_name'] }}" placeholder="Name" />
               </div>
               <div class="text-left" style="padding: 20px;">
                 Email : <b>{{ $userData['email'] }}</b>

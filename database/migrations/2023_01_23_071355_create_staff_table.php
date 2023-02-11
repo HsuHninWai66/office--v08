@@ -15,10 +15,11 @@ class CreateStaffTable extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('first_name');
+            $table->string('last_name');
             $table->string('gender');
             $table->string('dept');
-            $table->string('role'); 
+            $table->string('role');
             $table->string('office_time');
             $table->string('em_start_date');
             $table->string('experience_yr'); // Calculate current date with em_start_date
