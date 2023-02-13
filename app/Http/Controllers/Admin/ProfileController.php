@@ -103,6 +103,45 @@ class ProfileController extends Controller
         ];
 
         User::where('id', $id)->update($userData);
-        return redirect('/profile/list')->with('success', 'Successfully Updated!');
+        return redirect('/profile/list')->with('success', 'Well done! User infomation successfully updated!');
+    }
+
+    public function delete($id)
+    {
+        User::where('id', $id)->delete();
+        return redirect('profile/list')->with('success', 'Your profile is successfully Deleted!');
+    }
+
+    public function changePassword()
+    {
+        return view('prod.profile.change-password');
+    }
+
+    public function changePasswordPost(Request $request)
+    {
+        $dataEmail = Auth::user()->email;
+        $user = User::where('email', $dataEmail)->get();
+        $hashedPassword = $user[0]->password;
+
+
+        $request->validate([
+            'old-password' => 'required',
+            'new-password' => 'required|min:8|required_with:confirm-password|same:confirm-password',
+            'confirm-password' => 'required|min:8'
+        ], [
+            'old-password.required' => 'The current password field is required.'
+        ]);
+
+        if (Hash::check($request->get('old-password'), $hashedPassword)) {
+            $userData = User::whereEmail($dataEmail)->update([
+                'password' => Hash::make($request->get('new-password')),
+            ]);
+
+            if ($userData) {
+                return redirect('profile/list')->with('success', 'Password is successfully Updated!');
+            }
+        } else {
+            return redirect('profile/changepassword')->with('error', 'Current password is not match.');
+        }
     }
 }

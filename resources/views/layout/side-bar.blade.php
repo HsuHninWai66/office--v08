@@ -7,13 +7,27 @@
 
       <li><a><i class="fa fa-users"></i> Staff Management <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="{{ url('staff/list') }}">Staff Information</a></li>
-          <li><a href="#">Annual Leave</a></li>
-          <li><a href="#">Absence Days</a></li>
+          <li><a href="#"><i class="fa fa-building-o"></i>Department</a></li>
+          <li><a href="#"><i class="fa fa-female"></i>Position</a></li>
+          <li><a href="{{ url('staff/list') }}"><i class="fa fa-asterisk"></i>Staff</a></li>
         </ul>
       </li>
 
       @if(Auth::user()->role == 'Manager')
+
+      <li><a><i class="fa fa-book"></i> Annual Leave <span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+          <li><a href="#"><i class="fa fa-database"></i>List</a></li>
+          <li><a href="#"><i class="fa fa-plus"></i>Add</a></li>
+        </ul>
+      </li>
+
+      <li><a><i class="fa fa-calendar"></i> Absence <span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+          <li><a href="#"><i class="fa fa-database"></i>List</a></li>
+          <li><a href="#"><i class="fa fa-plus"></i>Add</a></li>
+        </ul>
+      </li>
 
       <li><a><i class="fa fa-clone"></i> Timecard Management <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
@@ -30,7 +44,8 @@
 
       <li><a><i class="fa fa-user"></i> Admin <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="{{ url('profile/list') }}">Lists</a></li>
+          <li><a href="{{ url('profile/list') }}"><i class="fa fa-database"></i>Lists</a></li>
+          <li><a href="{{ url('profile/add') }}"><i class="fa fa-plus"></i>Add</a></li>
         </ul>
       </li>
       @endif

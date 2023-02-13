@@ -3,6 +3,26 @@
 @include('layout.side-bar')
 @include('layout.top-nav')
 
+@if (session('success-login-staff'))
+
+        <!-- Modal HTML -->
+        <div id="myModal" class="modal fade" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-gradiant">Welcome!</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p style="color:#343a78;">You are logined as <strong>'{{ Auth::user()->name }}'</strong>. You can manage your information by yourself.</p>
+                    </div>
+                    <div class="modal-footer text-center">
+                        <a href="{{ url('staff/list') }}">To view all staffs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
@@ -84,3 +104,8 @@
         <!-- /page content -->
 
 @include('layout.footer')
+<script>
+    $(document).ready( function () {
+        $("#myModal").modal('show');
+    });
+</script>

@@ -11,7 +11,7 @@
               @csrf
               <h1>Login Form</h1>
                @if (session('success'))
-                  <div class="alert alert-success show mb-0" role="alert" style="margin-bottom: 10px !important;background:linear-gradient(45deg,#9c7efe8a,#faaca8a3) !important;border:none;">
+               <div class="alert alert-success alert-dismissible fade show" role="alert" style="background-color:#d4edda;color:#155724;">
                     {{session('success')}}
                   </div>
                 @elseif (session('login-fail'))
