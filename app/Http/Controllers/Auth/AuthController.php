@@ -69,7 +69,7 @@ class AuthController extends Controller
                     'user_id' => $sessionUserData->id,
                     'email' => $sessionUserData->email
                 ];
-                Mail::to('aungkaungmyatkpg777@gmail.com')->send(new VerificationMail($data));
+                Mail::to($sessionUserData->email)->send(new VerificationMail($data));
                 return redirect('/email-verify/user/' . $sessionUserData->id)->with(['data' => $data]);
             }
         } else {
@@ -129,7 +129,7 @@ class AuthController extends Controller
             'user_id' => $user->id,
             'email' => $user->email
         ];
-        Mail::to('aungkaungmyatkpg777@gmail.com')->send(new VerificationMail($data));
+        Mail::to($user->email)->send(new VerificationMail($data));
         return redirect('/email-verify/user/' . $user->id)->with(['data' => $data]);
     }
 
@@ -180,7 +180,7 @@ class AuthController extends Controller
             'name' => $user->first_name . $user->last_name,
             'url' => 'http://127.0.0.1:8000/verify-email/user/' . $user->id . '/' . $token
         ];
-        Mail::to('aungkaungmyatkpg777@gmail.com')->send(new VerificationMail($data));
+        Mail::to($user->email)->send(new VerificationMail($data));
 
         // Set a flash message
         $request->session()->flash('success', 'Email resent successfully!');
@@ -225,7 +225,7 @@ class AuthController extends Controller
             'user_id' => $user->id,
             'email' => $user->email,
         ];
-        Mail::to('aungkaungmyatkpg777@gmail.com')->send(new VerificationMail($data));
+        Mail::to($user->email)->send(new VerificationMail($data));
         return redirect('/forgot-reset');
     }
 
