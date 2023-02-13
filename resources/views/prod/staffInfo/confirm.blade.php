@@ -45,8 +45,11 @@
 
             <div class="field item form-group">
                 <label class="col-form-label col-md-3 col-sm-3  label-align">Name<span class="required">*</span></label>
-                <div class="col-md-6 col-sm-6">
-                    <input type="text" class="form-control" name="name" value="{{ $staffData['name'] }}" readonly/>
+                <div class="col-md-3 col-sm-3">
+                    <input type="text" class="form-control" name="first_name" value="{{ $staffData['first_name'] }}" readonly/>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <input type="text" class="form-control" name="last_name" value="{{ $staffData['last_name'] }}" readonly/>
                 </div>
             </div>
 

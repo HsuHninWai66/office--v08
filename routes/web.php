@@ -39,13 +39,16 @@ Route::group(['middleware' => ['isManager', 'auth']], function () {
     Route::get('/', [Admin\DashboardController::class, 'managerIndex']);
     Route::get('home', [Admin\DashboardController::class, 'managerIndex']);
 
-
+    // プロフィール
     Route::get('profile/list', [Admin\ProfileController::class, 'index']);
     Route::get('profile/add', [Admin\ProfileController::class, 'showProfile']);
     Route::post('profile/add', [Admin\ProfileController::class, 'profileValidation'])->name('profileValidation');
     Route::post('profile/confirm', [Admin\ProfileController::class, 'profileSave'])->name('profileSave');
     Route::get('profile/edit/{id}', [Admin\ProfileController::class, 'edit']);
+    Route::get('profile/changepassword', [Admin\ProfileController::class, 'changePassword']);
+    Route::post('profile/changepassword', [Admin\ProfileController::class, 'changePasswordPost'])->name('changepassword');
     Route::post('profile/update/{id}', [Admin\ProfileController::class, 'editValidate'])->name('editValidate');
+    Route::get('profile/delete/{id}', [Admin\ProfileController::class, 'delete']);
 });
 
 // Route Authentication for Staff

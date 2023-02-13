@@ -21,7 +21,8 @@ class StaffInfo extends Controller
     public function storeStaffData(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:staff',
+            'first_name' => 'required|unique:staff',
+            'last_name' => 'required|unique:staff',
             'gender' => '',
             'dept' => 'required',
             'role' => 'required',
@@ -35,7 +36,8 @@ class StaffInfo extends Controller
         ]);
 
         $staffData = [
-            'name' => $request->get('name'),
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
             'gender' => $request->get('gender'),
             'dept' => $request->get('dept'),
             'role' => $request->get('role'),
@@ -58,7 +60,7 @@ class StaffInfo extends Controller
             $replacements = array('profile_img' => $filename);
             $staffData = array_replace($staffData, $replacements);
         }
-
+        // dd($staffData);
         return view('prod.staffInfo.confirm', ['staffData' => $staffData]);
     }
 
@@ -66,7 +68,8 @@ class StaffInfo extends Controller
     {
 
         $staffData = [
-            'name' => $request->get('name'),
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
             'gender' => $request->get('gender'),
             'dept' => $request->get('dept'),
             'role' => $request->get('role'),
@@ -78,8 +81,7 @@ class StaffInfo extends Controller
             'status' => $request->get('status'),
             'profile_img' => $request->get('profile_img'),
         ];
-
         Staff::create($staffData);
-        return redirect('staff/list')->with('success', 'Staff successfully registered!');
+        return redirect('staff/list')->with('success', 'Well Done! Staff successfully registered!');
     }
 }

@@ -11,7 +11,7 @@
             <img src="{!! asset('images/my-pf.jpg') !!}" alt="" >{{ Auth::user()->name }}
           </a>
           <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item"  href="javascript:;"> Profile</a>
+            <a class="dropdown-item"  href="{{ route('changepassword') }}"><i class="fa fa-cog pull-right"></i> Change Password</a>
             <a class="dropdown-item"  href="{{ url('logout') }}"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
           </div>
         </li>
