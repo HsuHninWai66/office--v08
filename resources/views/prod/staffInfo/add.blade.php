@@ -76,25 +76,39 @@
                 <label class="col-form-label col-md-3 col-sm-3  label-align">Department<span
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
-                @error('dept')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
-                <input type="text" class="form-control @error('dept') parsley-error border border-danger @enderror" name="dept" value="{{ old('dept') }}"/></div>
+                    <select class="form-control @error('dept') parsley-error border border-danger @enderror" name="dept">
+                        <option value="">Choose Department</option>
+                        @foreach ($departments as $dept)
+                            <option value="{{ $dept->id }}" @if(old('dept') == $dept->id ) selected @endif>{{ $dept->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
 
             <div class="field item form-group">
-                <label class="col-form-label col-md-3 col-sm-3  label-align">Role<span
+                <label class="col-form-label col-md-3 col-sm-3  label-align">Position<span
                     class="required">*</span></label>
-                <div class="col-md-6 col-sm-6">
-                @error('role')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
-                <input class="form-control @error('role') parsley-error border border-danger @enderror" type="text" name="role" value="{{ old('role') }}"
-                    data-validate-linked='email'/></div>
+                    <div class="col-md-6 col-sm-6">
+                        <select class="form-control @error('dept') parsley-error border border-danger @enderror" name="role">
+                            <option value="">Choose Position</option>
+                            @foreach ($position as $pos)
+                                <option value="{{ $pos->id }}" @if(old('role') == $pos->id ) selected @endif>{{ $pos->position }}</option>
+                            @endforeach
+                        </select>
+                    </div>
             </div>
 
             <div class="field item form-group">
-                <label class="col-form-label col-md-3 col-sm-3  label-align">Office Hours<span
+                <label class="col-form-label col-md-3 col-sm-3  label-align">Office Time<span
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
-                @error('office_time')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
-                <input class="form-control @error('office_time') parsley-error border border-danger @enderror" type="text" name="office_time" value="{{ old('office_time') }}"></div>
+                    <select class="form-control @error('office_time') parsley-error border border-danger @enderror" name="office_time">
+                        <option value="">Choose Office Time</option>
+                        <option value="8:00-5:00">8:00AM-5:00PM</option>
+                        <option value="8:30-5:30">8:30AM-5:30PM</option>
+                        <option value="9:00-6:00">9:00AM-6:00PM</option>
+                    </select>
+                </div>
             </div>
 
             <div class="field item form-group">
@@ -102,7 +116,9 @@
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
                 @error('em_start_date')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
-                <input class="form-control @error('em_start_date') parsley-error border border-danger @enderror" type="date" name="em_start_date" value="{{ old('em_start_date') }}"></div>
+                <input class="form-control @error('em_start_date') parsley-error border border-danger @enderror" type="date" id="date-start" name="em_start_date" value="{{ old('em_start_date') }}">
+                <input type="hidden" id="date-end" value="">
+            </div>
             </div>
 
             <div class="field item form-group">
@@ -110,7 +126,7 @@
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
                 @error('experience_yr')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
-                <input class="form-control @error('experience_yr') parsley-error border border-danger @enderror" type="text" name="experience_yr" value="{{ old('experience_yr') }}"/></div>
+                <input class="form-control @error('experience_yr') parsley-error border border-danger @enderror" type="text" name="experience_yr" id="ex_yr" value="{{ old('experience_yr') }}" readonly/></div>
             </div>
 
             <div class="field item form-group">
@@ -160,3 +176,28 @@
 
 <!-- /page content -->
 @include('layout.footer')
+<script>
+    $(function() {
+        $('#date-start').change(function(event)
+        {
+            setDate();
+        });
+        function setDate(){
+            var fromDate = new Date($('#date-start').val());
+            var toDate = new Date();
+            if (!toDate.getDate() || fromDate.getDate()>toDate.getDate()){
+                var year = fromDate.getFullYear().toString();
+                var mm = (fromDate.getMonth() + 1).toString();
+                var dd = fromDate.getDate().toString();
+                var yyyymmdd = year + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]);
+                $('#date-end').val(yyyymmdd);
+            }
+            var years = Math.floor((toDate.getFullYear() - fromDate.getFullYear()));
+            if (years>=1){
+                $('#ex_yr').val(+years+' years');
+            }else{
+                $('#ex_yr').val('Under 1 Year');
+            }
+        }
+    });
+    </script>

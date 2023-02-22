@@ -7,9 +7,9 @@
 
       <li><a><i class="fa fa-users"></i> Staff Management <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="#"><i class="fa fa-building-o"></i>Department</a></li>
-          <li><a href="#"><i class="fa fa-female"></i>Position</a></li>
-          <li><a href="{{ url('staff/list') }}"><i class="fa fa-asterisk"></i>Staff</a></li>
+          <li><a href="{{ url('department') }}"><i class="fa fa-building-o"></i>Department</a></li>
+          <li><a href="{{ url('position') }}"><i class="fa fa-asterisk"></i>Position</a></li>
+          <li><a href="{{ url('staff/list') }}"><i class="fa fa-female"></i>Staff</a></li>
         </ul>
       </li>
 

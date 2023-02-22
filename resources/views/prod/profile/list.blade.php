@@ -8,7 +8,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3 class="ml-3" style="color:#3f51b5;">Admin User List</h3>
+                <h3 class="ml-3" style="color:#3f51b5;">Admin User List <i class="fa fa-users"></i></h3>
               </div>
 
               <div class="title_right">
@@ -64,7 +64,7 @@
                       <tbody>
                       @foreach ($users as $user)
                         <tr>
-                          <td>{{ $user->name }}</td>
+                          <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                           <td>{{ $user->email }}</td>
                           <td>@if($user->role == 'Manager') Admin/HR @else Staff @endif</td>
                           <td>@if($user->status == 1) <span class="badge badge-success">opened</span> @else <span class="badge badge-secondary">closed</span>  @endif</span></td>

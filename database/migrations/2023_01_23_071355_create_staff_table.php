@@ -25,7 +25,7 @@ class CreateStaffTable extends Migration
             $table->string('experience_yr'); // Calculate current date with em_start_date
             $table->string('profile_img');
             $table->string('sign');
-            $table->string('remark');
+            $table->string('remark')->nullable();
             $table->string('status');  // Still working or Resigned form work
             $table->timestamps();
         });

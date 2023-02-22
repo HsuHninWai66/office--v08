@@ -5,9 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Staff;
+use App\Models\Depart;
+use App\Models\Position;
 
 class StaffInfo extends Controller
 {
+    protected $respondData;
+
+    public function __construct()
+    {
+        $this->respondData = [];
+    }
+
     public function index()
     {
         return view('prod.staffInfo.list');
@@ -15,7 +24,11 @@ class StaffInfo extends Controller
 
     public function showCreate()
     {
-        return view('prod.staffInfo.add');
+        $this->respondData = [
+            'departments' => Depart::select('id', 'name')->orderby('name')->get(),
+            'position' => Position::latest()->get()
+        ];
+        return view('prod.staffInfo.add', $this->respondData);
     }
 
     public function storeStaffData(Request $request)
@@ -60,8 +73,13 @@ class StaffInfo extends Controller
             $replacements = array('profile_img' => $filename);
             $staffData = array_replace($staffData, $replacements);
         }
+
+        $this->respondData = [
+            'departments' => Depart::select('id', 'name')->orderby('name')->get(),
+            'staffData' => $staffData
+        ];
         // dd($staffData);
-        return view('prod.staffInfo.confirm', ['staffData' => $staffData]);
+        return view('prod.staffInfo.confirm', $this->respondData);
     }
 
     public function confirm(Request $request)

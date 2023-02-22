@@ -36,7 +36,7 @@
                           </div>
                           <div class="count" style="font-family: 'Yu Mincho';">ようこそ！</div>
 
-                          <h5 class="pl-3" style="text-transform:uppercase;">I'm {{ Auth::user()->name }}</h5>
+                          <h5 class="pl-3" style="text-transform:uppercase;">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
                           <p>for the best office management</p>
                         </div>
                       </div>
@@ -46,7 +46,7 @@
                           <div class="icon" style="width:170px;top:-2px;right:0;"><img src="{!! asset('images/d-03.png') !!}" style="width:100%;" alt=""></i>
                           </div>
                           <div class="count" style="font-family: 'Yu Mincho';">ダッシュボード画面</div>
-                          <h5 class="pl-3" style="text-transform:uppercase;">I'm {{ Auth::user()->name }}</h5>
+                          <h5 class="pl-3" style="text-transform:uppercase;">I'm {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
                           <p>Total Staff, Timecard System, General Cost</p>
                         </div>
                       </div>

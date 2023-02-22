@@ -15,7 +15,7 @@
         <div class="col-md-3 col-sm-5 col-xs-12 form-group pull-right top_search">
             <div class="input-group">
             <span class="input-group-btn">
-            <a class="btn" type="button" href="{{ route('changepassword') }}" style="background-color:#3f51b5;color:#fff;"><span class="fa fa-arrow-left pr-2"> </span>Go to lists</a>
+            {{-- <a class="btn" type="button" href="{{ route('changepassword') }}" style="background-color:#3f51b5;color:#fff;"><span class="fa fa-arrow-left pr-2"> </span>Go to lists</a> --}}
             </span>
             </div>
         </div>

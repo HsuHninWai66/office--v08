@@ -19,15 +19,15 @@ Route::post('login', [Auth\AuthController::class, 'login'])->name('login');
 Route::get('logout', [Auth\AuthController::class, 'logout'])->name('logout');
 
 // email verification
-Route::get('email-verify/user/{id}',[Auth\AuthController::class,'showEmailVerification'])->name('verifyEmailForm');
-Route::get('verify-email/user/{id}/{token}',[Auth\AuthController::class,'emailVerify'])->name('verifyEmail');
-Route::post('email-resent/user/{id}',[Auth\AuthController::class,'resentEmail'])->name('resentEmail');
+Route::get('email-verify/user/{id}', [Auth\AuthController::class, 'showEmailVerification'])->name('verifyEmailForm');
+Route::get('verify-email/user/{id}/{token}', [Auth\AuthController::class, 'emailVerify'])->name('verifyEmail');
+Route::post('email-resent/user/{id}', [Auth\AuthController::class, 'resentEmail'])->name('resentEmail');
 
 // forgot password
-Route::get('forgot-passsword',[Auth\AuthController::class,'showRecoveryForm'])->name('recoveryForm');
-Route::post('forgot-passsword',[Auth\AuthController::class,'recoveryPassword'])->name('recoveryPassword');
-Route::get('forgot-reset/{id}/{token}',[Auth\AuthController::class,'showPasswordResetForm'])->name('passwordResetForm');
-Route::post('forgot-reset/{id}',[Auth\AuthController::class,'passwordReset'])->name('passwordReset');
+Route::get('forgot-passsword', [Auth\AuthController::class, 'showRecoveryForm'])->name('recoveryForm');
+Route::post('forgot-passsword', [Auth\AuthController::class, 'recoveryPassword'])->name('recoveryPassword');
+Route::get('forgot-reset/{id}/{token}', [Auth\AuthController::class, 'showPasswordResetForm'])->name('passwordResetForm');
+Route::post('forgot-reset/{id}', [Auth\AuthController::class, 'passwordReset'])->name('passwordReset');
 
 Route::get('register', [Auth\AuthController::class, 'showRegister'])->name('register');
 Route::post('register', [Auth\AuthController::class, 'register'])->name('register');
@@ -65,4 +65,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('staff/add', [Admin\StaffInfo::class, 'showCreate']);
     Route::post('staff/add', [Admin\StaffInfo::class, 'storeStaffData'])->name('createStaff');
     Route::post('staff/confirm', [Admin\StaffInfo::class, 'confirm'])->name('confirmStaff');
+
+    //デパート
+    Route::get('department', [Admin\Depart::class, 'showCreate']);
+    Route::post('department', [Admin\Depart::class, 'storeData'])->name('createDepart');
+    Route::get('department/edit/{id}', [Admin\Depart::class, 'edit']);
+    Route::post('department/update/{id}', [Admin\Depart::class, 'editValidate'])->name('editValidate');
+    Route::get('department/delete/{id}', [Admin\Depart::class, 'delete']);
+
+    Route::get('position', [Admin\PositionController::class, 'showCreate']);
+    Route::post('position', [Admin\PositionController::class, 'storeData'])->name('createPosition');
+    Route::get('position/edit/{id}', [Admin\PositionController::class, 'edit']);
+    Route::post('position/update/{id}', [Admin\PositionController::class, 'editValidate'])->name('editValidate');
+    Route::get('position/delete/{id}', [Admin\PositionController::class, 'delete']);
 });
