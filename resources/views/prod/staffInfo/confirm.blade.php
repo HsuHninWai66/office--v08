@@ -45,8 +45,11 @@
 
             <div class="field item form-group">
                 <label class="col-form-label col-md-3 col-sm-3  label-align">Name<span class="required">*</span></label>
-                <div class="col-md-6 col-sm-6">
-                    <input type="text" class="form-control" name="name" value="{{ $staffData['name'] }}" readonly/>
+                <div class="col-md-3 col-sm-3">
+                    <input type="text" class="form-control" name="first_name" value="{{ $staffData['first_name'] }}" readonly/>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <input type="text" class="form-control" name="last_name" value="{{ $staffData['last_name'] }}" readonly/>
                 </div>
             </div>
 
@@ -66,10 +69,49 @@
             </div>
 
             <div class="field item form-group">
+                <label class="col-form-label col-md-3 col-sm-3  label-align">Birth Date<span
+                    class="required">*</span></label>
+                <div class="col-md-6 col-sm-6">
+                @error('birthdate')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
+                <input class="form-control @error('birthdate') parsley-error border border-danger @enderror" type="date" name="birthdate" value="{{ $staffData['birthdate'] }}" readonly>
+            </div>
+            </div>
+
+            <div class="field item form-group">
+                <label class="col-form-label col-md-3 col-sm-3  label-align">Email Address<span
+                    class="required">*</span></label>
+                <div class="col-md-6 col-sm-6">
+                    @error('email')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
+                    <input class="form-control @error('email') parsley-error border border-danger @enderror"
+                    name="email" placeholder="ex. staff@gmail.com" value="{{ $staffData['email'] }}" readonly/>
+                </div>
+            </div>
+
+            <div class="field item form-group">
+                <label class="col-form-label col-md-3 col-sm-3  label-align">Phone Number<span
+                    class="required">*</span></label>
+                <div class="col-md-6 col-sm-6">
+                    @error('phone_number')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
+                    <input class="form-control @error('phone_number') parsley-error border border-danger @enderror"
+                    name="phone_number" placeholder="ex. 09-00000-00000" value="{{ $staffData['phone_number'] }}" readonly/>
+                </div>
+            </div>
+
+            <div class="field item form-group">
+                <label class="col-form-label col-md-3 col-sm-3  label-align">Address</label>
+                <div class="col-md-6 col-sm-6">
+                    @error('address')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
+                    <input class="form-control @error('address') parsley-error border border-danger @enderror"
+                    name="address" placeholder="ex. No.xxx,xxxx,xxx." value="{{ $staffData['address'] }}"readonly/>
+                </div>
+            </div>
+
+            <div class="field item form-group">
                 <label class="col-form-label col-md-3 col-sm-3  label-align">Department<span
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
-                <input type="text" class="form-control" name="dept" value="{{ $staffData['dept'] }}" readonly/></div>
+                <input type="text" class="form-control" name="dept"
+                value="@foreach($departments as $dept)@if($staffData['dept'] == $dept->id){{$dept['name']}}@endif @endforeach" readonly/></div>
             </div>
 
             <div class="field item form-group">
@@ -77,7 +119,7 @@
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
                 <input class="form-control" type="text" name="role"
-                    data-validate-linked='email' value="{{ $staffData['role'] }}" readonly/></div>
+                    data-validate-linked='email' value="@foreach($position as $pos)@if($staffData['role'] == $pos->id){{$pos['position']}}@endif @endforeach" readonly/></div>
             </div>
 
             <div class="field item form-group">
@@ -110,15 +152,44 @@
                 </div>
 
             <div class="field item form-group">
-                <label class="col-form-label col-md-3 col-sm-3  label-align">Sign<span
-                    class="required">*</span></label>
+                <label class="col-form-label col-md-3 col-sm-3  label-align">Sign</label>
                 <div class="col-md-6 col-sm-6">
                 <input class="form-control" type="text" name="sign" value="{{ $staffData['sign'] }}" readonly/></div>
             </div>
 
             <div class="field item form-group">
-                <label class="col-form-label col-md-3 col-sm-3  label-align">Remark<span
-                    class="required">*</span></label>
+                <label class="col-form-label col-md-3 col-sm-3  label-align">KBZ Bank Acc</label>
+                <div class="col-md-6 col-sm-6">
+                <input class="form-control" type="text" name="kbz_bank_acc" value="{{ $staffData['kbz_bank_acc'] }}" readonly/></div>
+            </div>
+
+
+            <div class="field item form-group">
+                <label class="col-form-label col-md-3 col-sm-3  label-align">KPay Number</label>
+                <div class="col-md-6 col-sm-6">
+                <input class="form-control" type="text" name="kbz_pay" value="{{ $staffData['kbz_pay'] }}" readonly/></div>
+            </div>
+
+            <div class="field item form-group">
+                <label class="col-form-label col-md-3 col-sm-3  label-align">AYA Bank Acc</label>
+                <div class="col-md-6 col-sm-6">
+                <input class="form-control" type="text" name="aya_bank" value="{{ $staffData['aya_bank'] }}" readonly/></div>
+            </div>
+
+            <div class="field item form-group">
+                <label class="col-form-label col-md-3 col-sm-3  label-align">Yoma Bank Acc</label>
+                <div class="col-md-6 col-sm-6">
+                <input class="form-control" type="text" name="yoma_bank" value="{{ $staffData['yoma_bank'] }}" readonly/></div>
+            </div>
+
+            <div class="field item form-group">
+                <label class="col-form-label col-md-3 col-sm-3  label-align">Wave Number</label>
+                <div class="col-md-6 col-sm-6">
+                <input class="form-control" type="text" name="wave_money_number" value="{{ $staffData['wave_money_number'] }}" readonly/></div>
+            </div>
+
+            <div class="field item form-group">
+                <label class="col-form-label col-md-3 col-sm-3  label-align">Remark</label>
                 <div class="col-md-6 col-sm-6">
                 <textarea name='remark' readonly>{{ $staffData['remark'] }}</textarea></div>
             </div>

@@ -36,7 +36,8 @@ class ProfileController extends Controller
     public function profileValidation(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8|required_with:conf_password|same:conf_password',
             'conf_password' => 'required|min:8',
@@ -45,7 +46,8 @@ class ProfileController extends Controller
         ]);
 
         $userData = [
-            'name' => $request->get('name'),
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
             'password' => $request->get('password'),
             'role' => $request->get('role'),
@@ -65,7 +67,8 @@ class ProfileController extends Controller
     {
         $sessionUserData = Session::get('sessionUserData');
         $userData = [
-            'name' => $request->get('name'),
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
             'role' => $request->get('role'),
@@ -88,21 +91,62 @@ class ProfileController extends Controller
 
     public function editValidate(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'role' => 'required',
-            'status' => '',
-        ]);
+        // $request->validate([
+        //     'first_name' => $request->get('first_name'),
+        //     'last_name' => $request->get('last_name'),
+        //     'email' => 'required|email',
+        //     'role' => 'required',
+        //     'status' => '',
+        // ]);
 
         $userData = [
-            'name' => $request->get('name'),
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
             'role' => $request->get('role'),
-            'status' => $request->get('status')
+            'status' => 1
         ];
 
         User::where('id', $id)->update($userData);
-        return redirect('/profile/list')->with('success', 'Successfully Updated!');
+        return redirect('/profile/list')->with('success', 'Well done! User infomation successfully updated!');
+    }
+
+    public function delete($id)
+    {
+        User::where('id', $id)->delete();
+        return redirect('profile/list')->with('success', 'Your profile is successfully Deleted!');
+    }
+
+    public function changePassword()
+    {
+        return view('prod.profile.change-password');
+    }
+
+    public function changePasswordPost(Request $request)
+    {
+        $dataEmail = Auth::user()->email;
+        $user = User::where('email', $dataEmail)->get();
+        $hashedPassword = $user[0]->password;
+
+
+        $request->validate([
+            'old-password' => 'required',
+            'new-password' => 'required|min:8|required_with:confirm-password|same:confirm-password',
+            'confirm-password' => 'required|min:8'
+        ], [
+            'old-password.required' => 'The current password field is required.'
+        ]);
+
+        if (Hash::check($request->get('old-password'), $hashedPassword)) {
+            $userData = User::whereEmail($dataEmail)->update([
+                'password' => Hash::make($request->get('new-password')),
+            ]);
+
+            if ($userData) {
+                return redirect('profile/list')->with('success', 'Password is successfully Updated!');
+            }
+        } else {
+            return redirect('profile/changepassword')->with('error', 'Current password is not match.');
+        }
     }
 }

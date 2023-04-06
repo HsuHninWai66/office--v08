@@ -3,6 +3,26 @@
 @include('layout.side-bar')
 @include('layout.top-nav')
 
+@if (session('success-login-staff'))
+
+        <!-- Modal HTML -->
+        <div id="myModal" class="modal fade" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-gradiant">Welcome!</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p style="color:#343a78;">You are logined as <strong>'{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}'</strong>. You can manage your information by yourself.</p>
+                    </div>
+                    <div class="modal-footer text-center">
+                        <a href="{{ url('staff/list') }}">To view all staffs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
@@ -36,7 +56,7 @@
                           </div>
                           <div class="count" style="font-family: 'Yu Mincho';">ようこそ！</div>
 
-                          <h5 class="pl-3" style="text-transform:uppercase;">I'm {{ Auth::user()->name }}</h5>
+                          <h5 class="pl-3" style="text-transform:uppercase;">I'm {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
                           <p>for the best office management</p>
                         </div>
                       </div>
@@ -46,7 +66,7 @@
                           <div class="icon" style="width:170px;top:-2px;right:0;"><img src="{!! asset('images/d-03.png') !!}" style="width:100%;" alt=""></i>
                           </div>
                           <div class="count" style="font-family: 'Yu Mincho';">ダッシュボード画面</div>
-                          <h5 class="pl-3" style="text-transform:uppercase;">I'm {{ Auth::user()->name }}</h5>
+                          <h5 class="pl-3" style="text-transform:uppercase;">I'm {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
                           <p>Total Staff, Timecard System, General Cost</p>
                         </div>
                       </div>
@@ -84,3 +104,8 @@
         <!-- /page content -->
 
 @include('layout.footer')
+<script>
+    $(document).ready( function () {
+        $("#myModal").modal('show');
+    });
+</script>

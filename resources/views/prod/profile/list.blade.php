@@ -8,7 +8,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3 class="ml-3" style="color:#3f51b5;">Admin User List</h3>
+                <h3 class="ml-3" style="color:#3f51b5;">Admin User List <i class="fa fa-users"></i></h3>
               </div>
 
               <div class="title_right">
@@ -25,7 +25,7 @@
             <div class="clearfix"></div>
 
             @if (session('success'))
-                <div class="alert alert-success show mb-2" role="alert">
+                <div class="alert alert-success show mb-2" role="alert" style="background-color:#d4edda;color:#155724;">
                 {{session('success')}}
                 </div>
             @endif
@@ -64,12 +64,12 @@
                       <tbody>
                       @foreach ($users as $user)
                         <tr>
-                          <td>{{ $user->name }}</td>
+                          <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                           <td>{{ $user->email }}</td>
-                          <td>{{ $user->role }}</td>
-                          <td>@if($user->status == 1) opened @else closed @endif</td>
+                          <td>@if($user->role == 'Manager') Admin/HR @else Staff @endif</td>
+                          <td>@if($user->status == 1) <span class="badge badge-success">opened</span> @else <span class="badge badge-secondary">closed</span>  @endif</span></td>
                           <td>{{ $user->created_at }}</td>
-                          <td><a href="{{ url('profile/edit/' . $user->id) }}" class="text-primary">Edit</a> | <a href="#" class="text-danger">Delete</a></td>
+                          <td><a href="{{ url('profile/edit/' . $user->id) }}" class="text-primary"><i class="fa fa-edit"></i> Edit</a> | <a href="#" class="text-danger deleteBtn" data-link="{{ $user->id }}"><i class="fa fa-trash"></i> Delete</a></td>
                         </tr>
                       @endforeach
                       </tbody>
@@ -93,6 +93,34 @@
           </div>
         </div>
 
+        <!-- Modal HTML -->
+        <div id="myModal" class="modal fade" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Warning!</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-danger">Are you sure? Do you want to delete profile?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-secondary px-2 mr-1 rounded-0" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-sm btn-danger px-2 mr-1 rounded-0" id="deleteProfile" onclick="">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- /page content -->
 @include('layout.footer')
+
+<script>
+    $(document).ready( function () {
+        $(".deleteBtn").click(function() {
+            $("#myModal").modal('show');
+            let dd = $(this).data('link');
+            $('#deleteProfile').attr('onclick', `location.href='{{ url('profile/delete') }}/${dd}'`);
+         });
+    });
+</script>

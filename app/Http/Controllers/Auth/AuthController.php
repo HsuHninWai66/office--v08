@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Mail\VerificationMail;
+use App\Mail\WelcomeMail;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        // $this->middleware('guest')->except(['login']);
+        $this->middleware('guest')->except(['logout']);
     }
 
     public function index()
@@ -45,12 +46,14 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+            Mail::to($request->email)->send(new WelcomeMail());
             $request->session()->regenerate();
             $userID =  Auth::user()->id;
             $sessionUserData = User::Where('email', '=', $request->email)->first();
 
             if ($sessionUserData->email_verified) {
                 Session::put('sessionUserData', $sessionUserData);
+
                 if (Auth::user()->role == 'Manager') {
                     return redirect('manager/dashboard');
                 } else {
@@ -69,7 +72,7 @@ class AuthController extends Controller
                     'user_id' => $sessionUserData->id,
                     'email' => $sessionUserData->email
                 ];
-                Mail::to($sessionUserData->email)->send(new VerificationMail($data));
+                // Mail::to($sessionUserData->email)->send(new VerificationMail($data));
                 return redirect('/email-verify/user/' . $sessionUserData->id)->with(['data' => $data]);
             }
         } else {

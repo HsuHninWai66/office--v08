@@ -12,11 +12,11 @@
           <!-- menu profile quick info -->
           <div class="profile clearfix">
             <div class="profile_pic">
-              <img src="{!! asset('images/my-pf.jpg') !!}" alt="..." class="img-circle profile_img">
+              <img src="{!! asset('images/user.png') !!}" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span class="text-gradiant">Welcome,</span>
-              <h2 style="color: #343a78;text-transform:uppercase;">{{ Auth::user()->name }}</h2>
+              <h2 style="color: #343a78;text-transform:uppercase;">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h2>
             </div>
           </div>
           <!-- /menu profile quick info -->

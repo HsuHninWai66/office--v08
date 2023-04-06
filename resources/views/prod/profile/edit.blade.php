@@ -40,16 +40,26 @@
             </div>
             <div class="x_content">
 
-            <form action="{{ route('editValidate', $users->id) }}" method="POST">
+            <form action="{{ route('editValidateProfile', $users->id) }}" method="POST">
             @csrf
 
             <div class="field item form-group">
-                <label class="col-form-label col-md-3 col-sm-3  label-align">Name<span
+                <label class="col-form-label col-md-3 col-sm-3  label-align">First Name<span
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
-                    @error('name')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
+                    @error('first_name')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
                     <input type="text" class="form-control @error('name') parsley-error border border-danger @enderror"
-                    name="name" placeholder="ex. John f. Kennedy" value="{{ $users->name }}"/>
+                    name="first_name" placeholder="ex. John f. Kennedy" value="{{ $users->first_name }}"/>
+                </div>
+            </div>
+
+            <div class="field item form-group">
+                <label class="col-form-label col-md-3 col-sm-3  label-align">Last Name<span
+                    class="required">*</span></label>
+                <div class="col-md-6 col-sm-6">
+                    @error('last_name')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
+                    <input type="text" class="form-control @error('name') parsley-error border border-danger @enderror"
+                    name="last_name" placeholder="ex. John f. Kennedy" value="{{ $users->last_name }}"/>
                 </div>
             </div>
 

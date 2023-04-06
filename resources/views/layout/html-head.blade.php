@@ -61,5 +61,11 @@
         border:1px solid #9c7efe !important;
         color:#000 !important;
     }
+    .login_content form input[type="submit"]:hover, #content form .submit:hover {
+        background-image: none !important;
+        background-color: inherit !important;
+        border:1px solid #9c7efe !important;
+        color:#000 !important;
+    }
   </style>
 

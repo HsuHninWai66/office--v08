@@ -8,14 +8,14 @@
     <div class="">
     <div class="page-title">
         <div class="title_left">
-        <h3 class="ml-3" style="color:#3f51b5;">User Registr‌ation</h3>
+        <h3 class="ml-3" style="color:#3f51b5;">Change Password</h3>
         </div>
 
         <div class="title_right">
         <div class="col-md-3 col-sm-5 col-xs-12 form-group pull-right top_search">
             <div class="input-group">
             <span class="input-group-btn">
-            <a class="btn" type="button" href="{{ url('profile/add') }}" style="background-color:#3f51b5;color:#fff;"><span class="fa fa-arrow-left pr-2"> </span>Go to lists</a>
+            {{-- <a class="btn" type="button" href="{{ route('changepassword') }}" style="background-color:#3f51b5;color:#fff;"><span class="fa fa-arrow-left pr-2"> </span>Go to lists</a> --}}
             </span>
             </div>
         </div>
@@ -24,11 +24,23 @@
 
     <div class="clearfix"></div>
 
+    @if (session('error'))
+        <div class="alert alert-danger show mb-2" role="alert" style="background-color:#ff291617;color:#ac0000;">
+        {{session('error')}}
+        </div>
+    @endif
+
+    @if (session('success'))
+        <div class="alert alert-success show mb-2" role="alert" style="background-color:#d4edda;color:#155724;">
+        {{session('success')}}
+        </div>
+    @endif
+
     <div class="row">
         <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
             <div class="x_title">
-            <h2>Default Example <small>Users</small></h2>
+            <h2>Profile Password Change</h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -39,73 +51,44 @@
             <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                @if (isset($sessionUserData))
-                    {{ dd($sessionUserData) }}
-                @endif
-            <form action="{{ route('profileValidation') }}" method="POST">
+
+            <form action="{{ route('changepassword') }}" method="POST">
             @csrf
 
             <div class="field item form-group">
-                <label class="col-form-label col-md-3 col-sm-3  label-align">Name<span
+                <label class="col-form-label col-md-3 col-sm-3  label-align">Current Password<span
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
-                    @error('name')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
-                    <input type="text" class="form-control @error('name') parsley-error border border-danger @enderror"
-                    name="name" placeholder="ex. John f. Kennedy" value="{{ old('name') }}"/>
+                    @error('old-password')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
+                    <input type="password" class="form-control @error('old-password') parsley-error border border-danger @enderror"
+                    name="old-password" placeholder="*******" value=""/>
                 </div>
             </div>
 
             <div class="field item form-group">
-                <label class="col-form-label col-md-3 col-sm-3  label-align">Email<span
+                <label class="col-form-label col-md-3 col-sm-3  label-align">New Password<span
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
-                    @error('email')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
-                    <input type="email" class="form-control @error('email') parsley-error border border-danger @enderror"
-                    name="email" placeholder="" value="{{ old('email') }}"/>
+                    @error('new-password')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
+                    <input type="password" class="form-control @error('new-password') parsley-error border border-danger @enderror"
+                    name="new-password" placeholder="*******" value=""/>
                 </div>
             </div>
 
             <div class="field item form-group">
-                <label class="col-form-label col-md-3 col-sm-3  label-align">Password<span
+                <label class="col-form-label col-md-3 col-sm-3  label-align">Confirm New Password<span
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
-                    @error('password')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
-                    <input type="password" class="form-control @error('password') parsley-error border border-danger @enderror"
-                    name="password" placeholder="" value="{{ old('password') }}"/>
+                    @error('confirm-password')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
+                    <input type="password" class="form-control @error('confirm-password') parsley-error border border-danger @enderror"
+                    name="confirm-password" placeholder="*******" value=""/>
                 </div>
             </div>
 
-            <div class="field item form-group">
-                <label class="col-form-label col-md-3 col-sm-3  label-align">Confirm Password<span
-                    class="required">*</span></label>
-                <div class="col-md-6 col-sm-6">
-                    @error('conf_password')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
-                    <input type="password" class="form-control @error('conf_password') parsley-error border border-danger @enderror"
-                    name="conf_password" placeholder="" value="{{ old('conf_password') }}"/>
-                </div>
+            <div class="col-md-6 offset-md-3">
+                <button type='reset' class="btn btn-secondary">Reset</button>
+                <button type='submit' class="btn btn-gradiant">Submit</button>
             </div>
-
-            <div class="field item form-group">
-                <label class="col-form-label col-md-3 col-sm-3  label-align">Role<span
-                    class="required">*</span></label>
-
-                <div class="col-md-6 col-sm-6">
-                     @error('role')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
-                    <select class="form-control @error('role') parsley-error border border-danger @enderror" type="text" name="role" value="{{ old('role') }}"
-                        data-validate-linked='email'>
-                        <option value="">Choose Role</option>
-                        <option value="Manager">Admin/HR</option>
-                        <option value="Staff">Staff</option>
-                    </select>
-                </div>
-            </div>
-
-            <input class="form-control" type="hidden" name="status" value="1"/></div>
-
-                <div class="col-md-6 offset-md-3">
-                    <button type='reset' class="btn btn-secondary">Reset</button>
-                    <button type='submit' class="btn btn-primary">Submit</button>
-                </div>
             </form>
         </div>
         </div>

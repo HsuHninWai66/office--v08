@@ -10,7 +10,7 @@ class Staff extends Model
     use HasFactory;
 
     protected $fillable = [
-        'first_name', 'last_name', 'gender', 'dept', 'role', 'office_time', 'em_start_date', 'experience_yr', 'profile_img',
-        'sign', 'remark', 'status',
+        'first_name', 'last_name', 'gender', 'birthdate', 'phone_number', 'email', 'address', 'dept', 'role', 'office_time', 'em_start_date', 'experience_yr', 'profile_img',
+        'sign', 'remark', 'kbz_bank_acc', 'kbz_pay', 'aya_bank', 'yoma_bank', 'wave_money_number', 'status',
     ];
 }
