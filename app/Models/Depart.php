@@ -13,4 +13,9 @@ class Depart extends Model
     protected $fillable = [
         'name', 'remark'
     ];
+
+    public function department()
+    {
+        return $this->belongsTo(Depart::class, 'dept_id', 'id');
+    }
 }

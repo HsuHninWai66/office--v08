@@ -43,12 +43,22 @@
             @csrf
 
             <div class="field item form-group">
-                <label class="col-form-label col-md-3 col-sm-3  label-align">Name<span
+                <label class="col-form-label col-md-3 col-sm-3  label-align">First Name<span
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
-                    @error('name')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
-                    <input type="text" class="form-control @error('name') parsley-error border border-danger @enderror"
-                    name="name" placeholder="ex. John f. Kennedy" value="{{ $userData['name'] }}" readonly/>
+                    @error('first_name')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
+                    <input type="text" class="form-control @error('first_name') parsley-error border border-danger @enderror"
+                    name="first_name" placeholder="ex. John f. Kennedy" value="{{ $userData['first_name'] }}" readonly/>
+                </div>
+            </div>
+
+            <div class="field item form-group">
+                <label class="col-form-label col-md-3 col-sm-3  label-align">Last Name<span
+                    class="required">*</span></label>
+                <div class="col-md-6 col-sm-6">
+                    @error('last_name')<span class="error text-danger text-left d-block">{{$message}}</span>@enderror
+                    <input type="text" class="form-control @error('last_name') parsley-error border border-danger @enderror"
+                    name="last_name" placeholder="ex. John f. Kennedy" value="{{ $userData['last_name'] }}" readonly/>
                 </div>
             </div>
 

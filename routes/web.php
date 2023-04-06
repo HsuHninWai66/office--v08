@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth;
 use App\Http\Controllers\Admin;
+use App\Mail\WelcomeMail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,8 +38,8 @@ Route::post('register/confirm', [Auth\AuthController::class, 'registerConfirm'])
 // Route Authentication for Manager
 Route::group(['middleware' => ['isManager', 'auth']], function () {
     Route::get('manager/dashboard', [Admin\DashboardController::class, 'managerIndex']);
-    Route::get('/', [Admin\DashboardController::class, 'managerIndex']);
-    Route::get('home', [Admin\DashboardController::class, 'managerIndex']);
+    // Route::get('/', [Admin\DashboardController::class, 'managerIndex']);
+    // Route::get('home', [Admin\DashboardController::class, 'managerIndex']);
 
     // プロフィール
     Route::get('profile/list', [Admin\ProfileController::class, 'index']);
@@ -47,8 +49,11 @@ Route::group(['middleware' => ['isManager', 'auth']], function () {
     Route::get('profile/edit/{id}', [Admin\ProfileController::class, 'edit']);
     Route::get('profile/changepassword', [Admin\ProfileController::class, 'changePassword']);
     Route::post('profile/changepassword', [Admin\ProfileController::class, 'changePasswordPost'])->name('changepassword');
-    Route::post('profile/update/{id}', [Admin\ProfileController::class, 'editValidate'])->name('editValidate');
+    Route::post('profile/update/{id}', [Admin\ProfileController::class, 'editValidate'])->name('editValidateProfile');
     Route::get('profile/delete/{id}', [Admin\ProfileController::class, 'delete']);
+
+    Route::get('maileclipse', [Admin\Maileclipse::class, 'maileclipseM']);
+
 });
 
 // Route Authentication for Staff
@@ -65,12 +70,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('staff/add', [Admin\StaffInfo::class, 'showCreate']);
     Route::post('staff/add', [Admin\StaffInfo::class, 'storeStaffData'])->name('createStaff');
     Route::post('staff/confirm', [Admin\StaffInfo::class, 'confirm'])->name('confirmStaff');
+    Route::get('staff/detail/{id}', [Admin\StaffInfo::class, 'showDetail'])->name('showStaffDetail');
+    Route::get('staff/edit/{id}', [Admin\StaffInfo::class, 'edit']);
+    Route::post('staff/update/{id}', [Admin\StaffInfo::class, 'editValidateStaff'])->name('editValidateStaff');
+    Route::get('staff/delete/{id}', [Admin\StaffInfo::class, 'delete']);
+    Route::get('staff/report_batch/{id}', [Admin\StaffInfo::class, 'exportStaff']);
+    Route::get('get-positions-by-department', [Admin\StaffInfo::class, 'getPositionsByDepartment']);
 
     //デパート
     Route::get('department', [Admin\Depart::class, 'showCreate']);
     Route::post('department', [Admin\Depart::class, 'storeData'])->name('createDepart');
     Route::get('department/edit/{id}', [Admin\Depart::class, 'edit']);
-    Route::post('department/update/{id}', [Admin\Depart::class, 'editValidate'])->name('editValidate');
+    Route::post('department/update/{id}', [Admin\Depart::class, 'editValidate'])->name('editValidateDept');
     Route::get('department/delete/{id}', [Admin\Depart::class, 'delete']);
 
     Route::get('position', [Admin\PositionController::class, 'showCreate']);

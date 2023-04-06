@@ -48,6 +48,13 @@
           <li><a href="{{ url('profile/add') }}"><i class="fa fa-plus"></i>Add</a></li>
         </ul>
       </li>
+
+      <li><a><i class="fa fa-envelope"></i> Mail Templates <span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+          <li><a href="{{ url('maileclipse/mailables') }}"><i class="fa fa-envelope-o"></i>Mailables</a></li>
+          <li><a href="{{ url('maileclipse/templates') }}"><i class="fa fa-sliders"></i>Templates</a></li>
+        </ul>
+      </li>
       @endif
     </ul>
   </div>

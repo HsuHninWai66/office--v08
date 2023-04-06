@@ -36,7 +36,8 @@ class ProfileController extends Controller
     public function profileValidation(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8|required_with:conf_password|same:conf_password',
             'conf_password' => 'required|min:8',
@@ -45,7 +46,8 @@ class ProfileController extends Controller
         ]);
 
         $userData = [
-            'name' => $request->get('name'),
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
             'password' => $request->get('password'),
             'role' => $request->get('role'),
@@ -65,7 +67,8 @@ class ProfileController extends Controller
     {
         $sessionUserData = Session::get('sessionUserData');
         $userData = [
-            'name' => $request->get('name'),
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
             'role' => $request->get('role'),
@@ -88,18 +91,20 @@ class ProfileController extends Controller
 
     public function editValidate(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'role' => 'required',
-            'status' => '',
-        ]);
+        // $request->validate([
+        //     'first_name' => $request->get('first_name'),
+        //     'last_name' => $request->get('last_name'),
+        //     'email' => 'required|email',
+        //     'role' => 'required',
+        //     'status' => '',
+        // ]);
 
         $userData = [
-            'name' => $request->get('name'),
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
             'role' => $request->get('role'),
-            'status' => $request->get('status')
+            'status' => 1
         ];
 
         User::where('id', $id)->update($userData);

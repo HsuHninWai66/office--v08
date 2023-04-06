@@ -55,57 +55,34 @@
                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                       <thead>
                         <tr>
+                          <th>ID</th>
+                          <th>Profile </th>
                           <th>Name</th>
                           <th>Position</th>
-                          <th>Office</th>
-                          <th>Age</th>
-                          <th>Start date</th>
-                          <th>Salary</th>
+                          <th>Department</th>
+                          <th>Email Address</th>
+                          <th>Address</th>
+                          <th>Registered DateTime</th>
                         </tr>
                       </thead>
 
 
                       <tbody>
+                        @foreach($staff as $staffData)
                         <tr>
-                          <td>Tiger Nixon</td>
-                          <td>System Architect</td>
-                          <td>Edinburgh</td>
-                          <td>61</td>
-                          <td>2011/04/25</td>
-                          <td>$320,800</td>
+                          <td>{{ $staffData['id'] }}</td>
+                          <td style="padding:3px;text-align:center;"><img src="{!! asset('/uploads/staff/'.$staffData['profile_img']) !!}" id="pic" width="60"></td>
+                          <td><a href="{{ url('staff/detail/'.$staffData->id) }}"> {{ $staffData['first_name'] }} {{ $staffData['last_name'] }}</a><br>
+                            <a href="{{ url('staff/detail/'.$staffData->id) }}" style="font-size:0.8em;" class="text-primary"><i class="fa fa-eye"></i> View Detail</a> |
+                            <a href="{{ url('staff/delete/'.$staffData->id) }}" style="font-size:0.8em;" class="text-danger"><i class="fa fa-trash"></i> Delete</a>
+                        </td>
+                          <td>{{ $staffData['role'] }}</td>
+                          <td>{{ $staffData['dept'] }}</td>
+                          <td>{{ $staffData['email'] }}</td>
+                          <td>{{ $staffData['address'] }}</td>
+                          <td>{{ $staffData['created_at'] }}</td>
                         </tr>
-                        <tr>
-                          <td>Garrett Winters</td>
-                          <td>Accountant</td>
-                          <td>Tokyo</td>
-                          <td>63</td>
-                          <td>2011/07/25</td>
-                          <td>$170,750</td>
-                        </tr>
-                        <tr>
-                          <td>Ashton Cox</td>
-                          <td>Junior Technical Author</td>
-                          <td>San Francisco</td>
-                          <td>66</td>
-                          <td>2009/01/12</td>
-                          <td>$86,000</td>
-                        </tr>
-                        <tr>
-                          <td>Michael Bruce</td>
-                          <td>Javascript Developer</td>
-                          <td>Singapore</td>
-                          <td>29</td>
-                          <td>2011/06/27</td>
-                          <td>$183,000</td>
-                        </tr>
-                        <tr>
-                          <td>Donna Snider</td>
-                          <td>Customer Support</td>
-                          <td>New York</td>
-                          <td>27</td>
-                          <td>2011/01/25</td>
-                          <td>$112,000</td>
-                        </tr>
+                        @endforeach
                       </tbody>
                     </table>
                   </div>

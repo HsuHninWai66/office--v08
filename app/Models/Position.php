@@ -13,4 +13,9 @@ class Position extends Model
     protected $fillable = [
         'position', 'dept_id', 'remark'
     ];
+
+    public function positions()
+    {
+        return $this->hasMany(Position::class);
+    }
 }

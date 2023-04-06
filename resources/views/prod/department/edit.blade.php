@@ -41,7 +41,7 @@
                 <div class="x_content">
                   <br />
 
-                  <form action="{{ route('editValidate', $departments->id) }}" method="POST">
+                  <form action="{{ route('editValidateDept', $departments->id) }}" method="POST">
                     @csrf
 
                     <div class="field item form-group">
