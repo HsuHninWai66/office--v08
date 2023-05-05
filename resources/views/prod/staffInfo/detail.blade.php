@@ -8,7 +8,7 @@
     <div class="">
       <div class="page-title">
         <div class="title_left">
-            <h3 class="ml-3" style="color:#3f51b5;">Staff's Detail View</h3>
+            <h3 class="ml-3" style="color:#3f51b5;">Employee's Detail View</h3>
         </div>
 
         <div class="title_right">

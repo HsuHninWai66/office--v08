@@ -8,7 +8,7 @@
     <div class="">
     <div class="page-title">
         <div class="title_left">
-        <h3 class="ml-3" style="color:#3f51b5;">Staff Management : Edit</h3>
+        <h3 class="ml-3" style="color:#3f51b5;">Employee Management :Edit</h3>
         </div>
 
         <div class="title_right">
@@ -143,14 +143,14 @@
                 <label class="col-form-label col-md-3 col-sm-3  label-align">Employ Start Date<span
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
-                <input class="form-control" type="date" name="em_start_date" value="{{ $staffData['em_start_date'] }}" ></div>
+                <input class="form-control" type="date" name="em_start_date" value="{{ $staffData['em_start_date'] }}" id="date-start"></div>
             </div>
 
             <div class="field item form-group">
                 <label class="col-form-label col-md-3 col-sm-3  label-align">Experience Year<span
                     class="required">*</span></label>
                 <div class="col-md-6 col-sm-6">
-                <input class="form-control" type="text" name="experience_yr" value="{{ $staffData['experience_yr'] }}" readonly/></div>
+                <input class="form-control" type="text" name="experience_yr" value="{{ $staffData['experience_yr'] }}" id="ex_yr" readonly/></div>
             </div>
 
             <div class="field item form-group">
@@ -230,3 +230,28 @@
 </div>
 <!-- /page content -->
 @include('layout.footer')
+<script>
+    $(function() {
+        $('#date-start').change(function(event)
+        {
+            setDate();
+        });
+        function setDate(){
+            var fromDate = new Date($('#date-start').val());
+            var toDate = new Date();
+            if (!toDate.getDate() || fromDate.getDate()>toDate.getDate()){
+                var year = fromDate.getFullYear().toString();
+                var mm = (fromDate.getMonth() + 1).toString();
+                var dd = fromDate.getDate().toString();
+                var yyyymmdd = year + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]);
+                $('#date-end').val(yyyymmdd);
+            }
+            var years = Math.floor((toDate.getFullYear() - fromDate.getFullYear()));
+            if (years>=1){
+                $('#ex_yr').val(+years+' years');
+            }else{
+                $('#ex_yr').val('Under 1 Year');
+            }
+        }
+    });
+</script>

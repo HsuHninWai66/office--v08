@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\newStaffNoti;
 use Barryvdh\DomPDF\Facade\PDF;
+use Spatie\ViewModels\Javascript;
 
 class StaffInfo extends Controller
 {
@@ -34,9 +35,11 @@ class StaffInfo extends Controller
 
     public function showCreate()
     {
+
         $this->respondData = [
             'departments' => Depart::select('id', 'name')->orderby('name')->get(),
-            'position' => Position::latest()->get()
+            'position' => Position::latest()->get(),
+            'staffID' => Staff::latest()->get(),
         ];
         return view('prod.staffInfo.add', $this->respondData);
     }
@@ -45,8 +48,8 @@ class StaffInfo extends Controller
     {
 
         $request->validate([
-            'first_name' => 'required|unique:staff',
-            'last_name' => 'required|unique:staff',
+            'first_name' => 'required|unique:offi_staff_management',
+            'last_name' => 'required|unique:offi_staff_management',
             'gender' => '',
             'birthdate' => 'required',
             'phone_number' => 'required',
@@ -172,6 +175,8 @@ class StaffInfo extends Controller
     public function editValidateStaff(Request $request, $id)
     {
 
+        $staff = Staff::where('id', $id)->first();
+
         $staffData = [
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
@@ -205,6 +210,8 @@ class StaffInfo extends Controller
 
             $replacements = array('profile_img' => $filename);
             $staffData = array_replace($staffData, $replacements);
+        } else {
+            $staffData['profile_img'] = $staff->profile_img;
         }
 
         Staff::where('id', $id)->update($staffData);

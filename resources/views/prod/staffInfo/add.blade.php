@@ -3,13 +3,12 @@
 @include('layout.side-bar')
 @include('layout.top-nav')
 
-
 <!-- page content -->
 <div class="right_col" role="main">
     <div class="">
     <div class="page-title">
         <div class="title_left">
-        <h3 class="ml-3" style="color:#3f51b5;">Staff Management : Register</h3>
+        <h3 class="ml-3" style="color:#3f51b5;">Employee Management :Register</h3>
         </div>
 
         <div class="title_right">
@@ -128,7 +127,7 @@
                 <label class="col-form-label col-md-3 col-sm-3  label-align">Position<span
                     class="required">*</span></label>
                     <div class="col-md-6 col-sm-6">
-                        <select class="form-control @error('dept') parsley-error border border-danger @enderror" name="role">
+                        <select class="form-control @error('dept') parsley-error border border-danger @enderror" name="role" id="position-select">
                             <option value="">Choose Position</option>
                             @foreach ($position as $pos)
                                 <option value="{{ $pos->id }}" @if(old('role') == $pos->id ) selected @endif>{{ $pos->position }}</option>
@@ -243,6 +242,7 @@
 
 <!-- /page content -->
 @include('layout.footer')
+@include('prod.staffInfo.common_script')
 <script>
     $(function() {
         $('#date-start').change(function(event)
@@ -267,4 +267,4 @@
             }
         }
     });
-    </script>
+</script>

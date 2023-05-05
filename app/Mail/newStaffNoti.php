@@ -41,7 +41,7 @@ class newStaffNoti extends Mailable
         ];
 
         $pdf = PDF::loadView('export.staff-pdf', $this->respondData);
-        return $this->subject('Car Stolen Report')
+        return $this->subject('New Staff Entry')
             ->view('mail.staff', $this->staffData)
             ->attachData($pdf->output(), "complete.pdf");
     }

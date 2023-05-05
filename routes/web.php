@@ -89,4 +89,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('position/edit/{id}', [Admin\PositionController::class, 'edit']);
     Route::post('position/update/{id}', [Admin\PositionController::class, 'editValidate'])->name('editValidate');
     Route::get('position/delete/{id}', [Admin\PositionController::class, 'delete']);
+
+    // Route::get('timecard', [Admin\PositionController::class, 'showCreate']);
 });

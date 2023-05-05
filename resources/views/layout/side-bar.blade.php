@@ -5,11 +5,11 @@
     <ul class="nav side-menu">
       <li class="{{ (Request::path()==('dashboard') ? 'active' : '') }}"><a href="@if(Auth::user()->role == 'Manager'){{ url('manager/dashboard') }}@else{{ url('staff/dashboard') }}@endif"><i class="fa fa-home"></i> Dashboard </a></li>
 
-      <li><a><i class="fa fa-users"></i> Staff Management <span class="fa fa-chevron-down"></span></a>
+      <li><a><i class="fa fa-users"></i> Employee Management <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
           <li><a href="{{ url('department') }}"><i class="fa fa-building-o"></i>Department</a></li>
           <li><a href="{{ url('position') }}"><i class="fa fa-asterisk"></i>Position</a></li>
-          <li><a href="{{ url('staff/list') }}"><i class="fa fa-female"></i>Staff</a></li>
+          <li><a href="{{ url('staff/list') }}"><i class="fa fa-female"></i>Employee</a></li>
         </ul>
       </li>
 
@@ -22,7 +22,7 @@
         </ul>
       </li>
 
-      <li><a><i class="fa fa-calendar"></i> Absence <span class="fa fa-chevron-down"></span></a>
+      <li><a><i class="fa fa-calendar"></i> Attendance <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
           <li><a href="#"><i class="fa fa-database"></i>List</a></li>
           <li><a href="#"><i class="fa fa-plus"></i>Add</a></li>
@@ -31,7 +31,8 @@
 
       <li><a><i class="fa fa-clone"></i> Timecard Management <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="#">Lists</a></li>
+            <li><a href="#"><i class="fa fa-database"></i>List</a></li>
+          <li><a href="#"><i class="fa fa-plus"></i>Add</a></li>
         </ul>
       </li>
 
